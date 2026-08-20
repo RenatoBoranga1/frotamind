@@ -107,9 +107,6 @@
     <string name="selected_vehicle_info">Placa: %1$s  |  Frota: %2$s</string>
     <string name="label_fleet_code">Frota: %1$s</string>
     <string name="quick_actions">Acoes rapidas</string>
-    <string name="quick_access_loading">Liberando acesso rapido...</string>
-    <string name="quick_access_offline_message">Login oculto por enquanto. O app entrou com acesso rapido temporario.</string>
-    <string name="quick_access_error">Nao foi possivel liberar o acesso rapido.</string>
     <string name="summary_total_month">Total do mes</string>
     <string name="summary_records">Registros</string>
     <string name="summary_pending">Pendentes</string>
@@ -166,7 +163,6 @@
     <string name="email">E-mail</string>
     <string name="password">Senha</string>
     <string name="sign_in">Entrar</string>
-    <string name="skip_for_now">Acesso demonstracao</string>
     <string name="login_error">Nao foi possivel iniciar sessao.</string>
     <string name="login_success">Acesso liberado com sucesso.</string>
     <string name="logout">Sair</string>
@@ -234,7 +230,6 @@
     <string name="current_user_label">Usuario: %1$s</string>
     <string name="current_profile_label">Perfil: %1$s</string>
     <string name="driver_locked">Motorista vinculado a esta conta.</string>
-    <string name="demo_access_hint">Para demonstracao do FrotaMind, voce pode usar os perfis demo ou tocar em Acesso demonstracao para entrar rapidamente.</string>
     <string name="brand_platform_tagline">Plataforma operacional unificada</string>
     <string name="driver_status_active">Motorista ativo</string>
     <string name="driver_status_inactive">Motorista inativo</string>

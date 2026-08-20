@@ -127,26 +127,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/sign_in" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonSkipLogin"
-                    style="@style/Widget.ArlaControle.Button.Outlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/skip_for_now" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/textDemoHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_surface_card"
-            android:padding="16dp"
-            android:text="@string/demo_access_hint"
-            android:textColor="@color/text_secondary" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

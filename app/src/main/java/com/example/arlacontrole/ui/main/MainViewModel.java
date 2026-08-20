@@ -22,14 +22,6 @@ public class MainViewModel extends BaseArlaViewModel {
         return repository.getCurrentSession();
     }
 
-    public void login(String email, String password, RepositoryCallback<AuthSession> callback) {
-        repository.login(email, password, callback);
-    }
-
-    public void enableTemporaryAccess(RepositoryCallback<AuthSession> callback) {
-        repository.enableTemporaryAccess(callback);
-    }
-
     public void logout(RepositoryCallback<Void> callback) {
         repository.logout(callback);
     }

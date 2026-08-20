@@ -15,10 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.arlacontrole.R;
 import com.example.arlacontrole.data.repository.RepositoryCallback;
+import com.example.arlacontrole.model.AuthSession;
 import com.example.arlacontrole.databinding.ActivitySafetySpreadsheetImportBinding;
 import com.example.arlacontrole.model.SafetyImportResult;
+import com.example.arlacontrole.model.UserRole;
 import com.example.arlacontrole.utils.AppPreferences;
-import com.example.arlacontrole.utils.SafetyImportAccess;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -49,7 +50,8 @@ public class SafetySpreadsheetImportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!SafetyImportAccess.canImportOccurrences(new AppPreferences(this).getSession())) {
+        AuthSession session = new AppPreferences(this).getSession();
+        if (session == null || !UserRole.canImportSafetyOccurrences(session.role)) {
             finish();
             return;
         }

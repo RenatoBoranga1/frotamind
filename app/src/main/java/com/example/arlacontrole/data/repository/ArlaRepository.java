@@ -61,7 +61,6 @@ import com.example.arlacontrole.rules.FuelRulesEngine;
 import com.example.arlacontrole.sync.SyncScheduler;
 import com.example.arlacontrole.utils.AppPreferences;
 import com.example.arlacontrole.utils.FormatUtils;
-import com.example.arlacontrole.utils.SafetyImportAccess;
 
 import java.io.File;
 import java.io.IOException;
@@ -194,25 +193,6 @@ public class ArlaRepository {
 
     public boolean hasValidSession() {
         return preferences.hasValidSession();
-    }
-
-    public void enableTemporaryAccess(RepositoryCallback<AuthSession> callback) {
-        ArlaDatabase.databaseWriteExecutor.execute(() -> {
-            try {
-                AuthSession session = new AuthSession();
-                session.userId = -1L;
-                session.fullName = "Importador de Seguranca";
-                session.email = SafetyImportAccess.AUTHORIZED_IMPORT_EMAIL;
-                session.role = UserRole.ADMIN;
-                session.linkedDriverName = "";
-                session.accessToken = "temporary-access-token";
-                session.expiresAtIso = "";
-                preferences.saveSession(session);
-                postSuccess(callback, session);
-            } catch (Exception exception) {
-                postError(callback, exception.getMessage() == null ? "Nao foi possivel liberar o acesso rapido." : exception.getMessage());
-            }
-        });
     }
 
     public void login(String email, String password, RepositoryCallback<AuthSession> callback) {
@@ -565,7 +545,8 @@ public class ArlaRepository {
     public void importSafetyEventsSpreadsheet(Uri fileUri, String fileName, RepositoryCallback<SafetyImportResult> callback) {
         ArlaDatabase.databaseWriteExecutor.execute(() -> {
             try {
-                if (!SafetyImportAccess.canImportOccurrences(preferences.getSession())) {
+                AuthSession session = preferences.getSession();
+                if (session == null || !UserRole.canImportSafetyOccurrences(session.role)) {
                     postError(callback, "A importacao de ocorrencias por planilha e exclusiva do usuario autorizado de seguranca.");
                     return;
                 }

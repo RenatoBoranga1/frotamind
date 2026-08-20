@@ -17,9 +17,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String QUICK_ACCESS_EMAIL = "renato@arla.app";
-    private static final String QUICK_ACCESS_PASSWORD = "123456";
-
     private ActivityLoginBinding binding;
     private LoginViewModel viewModel;
 
@@ -36,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         binding.buttonLogin.setOnClickListener(v -> submitLogin());
-        binding.buttonSkipLogin.setOnClickListener(v -> submitQuickAccess());
     }
 
     private void submitLogin() {
@@ -55,12 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.inputEmail.setError(null);
         binding.inputPassword.setError(null);
         performLogin(email, password);
-    }
-
-    private void submitQuickAccess() {
-        binding.inputEmail.setError(null);
-        binding.inputPassword.setError(null);
-        performLogin(QUICK_ACCESS_EMAIL, QUICK_ACCESS_PASSWORD);
     }
 
     private void performLogin(String email, String password) {
@@ -85,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
     private void setLoading(boolean isLoading) {
         binding.progressLogin.setVisibility(isLoading ? android.view.View.VISIBLE : android.view.View.GONE);
         binding.buttonLogin.setEnabled(!isLoading);
-        binding.buttonSkipLogin.setEnabled(!isLoading);
     }
 
     private void openMain() {

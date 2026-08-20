@@ -21,7 +21,6 @@ import com.example.arlacontrole.ui.SafetyRankingAdapter;
 import com.example.arlacontrole.ui.export.ReportExportBottomSheet;
 import com.example.arlacontrole.utils.AppPreferences;
 import com.example.arlacontrole.utils.FormatUtils;
-import com.example.arlacontrole.utils.SafetyImportAccess;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -54,7 +53,7 @@ public class SafetyHubFragment extends Fragment {
         String role = session.role;
         boolean isDriver = UserRole.isDriver(role);
         boolean canExport = UserRole.canExportReports(role);
-        boolean canImportOccurrences = SafetyImportAccess.canImportOccurrences(session);
+        boolean canImportOccurrences = UserRole.canImportSafetyOccurrences(role);
 
         recentAdapter = new SafetyEventAdapter(entity -> {
             Intent intent = new Intent(requireContext(), SafetyEventDetailActivity.class);

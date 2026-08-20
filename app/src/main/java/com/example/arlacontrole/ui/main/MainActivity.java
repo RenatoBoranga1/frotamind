@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.arlacontrole.R;
-import com.example.arlacontrole.data.repository.RepositoryCallback;
 import com.example.arlacontrole.databinding.ActivityMainBinding;
 import com.example.arlacontrole.model.AuthSession;
 import com.example.arlacontrole.model.UserRole;
+import com.example.arlacontrole.ui.auth.LoginActivity;
 import com.example.arlacontrole.ui.campo.FieldHomeFragment;
 import com.example.arlacontrole.ui.dashboard.DashboardFragment;
 import com.example.arlacontrole.ui.historico.HistoryFragment;
@@ -21,7 +21,6 @@ import com.example.arlacontrole.ui.indicadores.IndicatorsFragment;
 import com.example.arlacontrole.ui.management.ManagementHubFragment;
 import com.example.arlacontrole.ui.seguranca.SafetyHubFragment;
 import com.example.arlacontrole.ui.sync.SyncStatusFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             session = viewModel.getSession();
             initializeMainContent(savedInstanceState == null);
         } else {
-            enableDirectAccess(savedInstanceState == null);
+            openLogin();
         }
     }
 
@@ -51,30 +50,9 @@ public class MainActivity extends AppCompatActivity {
         configureBottomNavigation(selectDefaultItem);
     }
 
-    private void enableDirectAccess(boolean selectDefaultItem) {
-        binding.toolbar.setSubtitle(getString(R.string.quick_access_loading));
-        binding.bottomNavigation.getMenu().clear();
-        binding.bottomNavigation.setEnabled(false);
-
-        viewModel.enableTemporaryAccess(new RepositoryCallback<AuthSession>() {
-            @Override
-            public void onSuccess(AuthSession result) {
-                session = result;
-                initializeMainContent(selectDefaultItem);
-            }
-
-            @Override
-            public void onError(String message) {
-                Snackbar.make(
-                    binding.getRoot(),
-                    message == null || message.trim().isEmpty()
-                        ? getString(R.string.quick_access_error)
-                        : message,
-                    Snackbar.LENGTH_LONG
-                ).show();
-                finish();
-            }
-        });
+    private void openLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
     private void configureBottomNavigation(boolean selectDefaultItem) {

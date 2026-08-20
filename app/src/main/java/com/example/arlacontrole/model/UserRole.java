@@ -23,4 +23,8 @@ public final class UserRole {
     public static boolean canAccessSettings(String role) {
         return ADMIN.equals(role);
     }
+
+    public static boolean canImportSafetyOccurrences(String role) {
+        return ADMIN.equals(role);
+    }
 }
